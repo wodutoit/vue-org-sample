@@ -18,9 +18,10 @@
           Welcome to Vuetify
         </h1>
         <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank">Discord Community</a>
+          Insert the org chart here... panning: {{ chart.isPan }}
+          <organization-chart :datasource="chart.chartData" :pan="chart.isPan">
+            
+          </organization-chart>
         </p>
       </v-flex>
 
@@ -85,7 +86,14 @@
 </template>
 
 <script>
+import OrganizationChart from 'vue-organization-chart';
+
+import 'vue-organization-chart/dist/orgchart.css';
+
 export default {
+  components: {
+    OrganizationChart,
+  },
   data: () => ({
     ecosystem: [
       {
@@ -137,6 +145,50 @@ export default {
         href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
       },
     ],
+    chart: {
+      chartData: {
+        id: '1',
+        name: 'L L',
+        title: 'CEO',
+        children: [
+          { id: '2', name: 'B', title: 'COO' },
+          {
+            id: '3',
+            name: 'C',
+            title: 'CTO',
+            children: [
+              { id: '5', name: 'C A', title: 'Dev Manager' },
+              { id: '6', name: 'C B', title: 'BA Manager' },
+            ],
+          },
+          { id: '4', name: 'D', title: 'CFO' },
+          {
+            id: '7',
+            name: 'E',
+            title: 'CFO',
+            children: [
+              { id: '5', name: 'C A', title: 'Dev Manager' },
+              { id: '5', name: 'C A', title: 'Dev Manager' },
+              { id: '5', name: 'C A', title: 'Dev Manager' },
+              { id: '5', name: 'C A', title: 'Dev Manager' },
+              {
+                id: '7',
+                name: 'E',
+                title: 'CFO',
+                children: [
+                  { id: '5', name: 'C A', title: 'Dev Manager' },
+                  { id: '5', name: 'C A', title: 'Dev Manager' },
+                  { id: '5', name: 'C A', title: 'Dev Manager' },
+                  { id: '5', name: 'C A', title: 'Dev Manager' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      isPan: true,
+      isZoom: true,
+    },
   }),
 };
 </script>
